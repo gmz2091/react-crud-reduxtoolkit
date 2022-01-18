@@ -4,6 +4,7 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import userSessionSlice from './slices/auth';
+import productsSlice from './slices/products';
 import users from './slices/users';
 // import userSessionSlice from './slices/auth';
 
@@ -12,5 +13,6 @@ export const store = configureStore({
   reducer: {
     users,
     sessions: userSessionSlice,
+    products: productsSlice,
   },
 });

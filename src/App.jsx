@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import UserList from './components/UserList';
 import LoginForm from './components/LoginForm';
 import './App.css';
+import ProductsList from './Pages/Products';
 
 const App = () => {
   // eslint-disable-next-line no-unused-vars
@@ -23,7 +24,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         {session ? (
-          <Route path="/users" element={<UserList />} />
+          <>
+            <Route path="/users" element={<UserList />} />
+            <Route path="/products" element={<ProductsList />} />
+          </>
         ) : (
           <Route path="/login" element={<LoginForm />} />
         )}

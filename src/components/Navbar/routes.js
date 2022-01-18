@@ -9,6 +9,11 @@ const Routes = [
     title: 'Users',
     // component: UserList,
   },
+  {
+    path: '/products',
+    title: 'Products',
+    // component: UserList,
+  },
 ];
 
 export default Routes;

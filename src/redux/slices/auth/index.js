@@ -5,7 +5,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const userSessionSlice = createSlice({
   name: 'sessions',
   initialState: {
-    session: false,
+    session: true,
   },
   reducers: {
     // eslint-disable-next-line no-unused-vars
