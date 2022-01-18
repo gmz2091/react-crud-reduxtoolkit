@@ -50,7 +50,7 @@ const ProductsList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(listProducts);
+    console.log(process.env.REACT_APP_API_URL);
     dispatch(fetAllProducts());
   }, []);
 
