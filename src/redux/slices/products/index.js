@@ -9,6 +9,7 @@ export const productsSlice = createSlice({
   initialState: {
     list: [],
     productsB: [],
+    categories: {},
   },
   reducers: {
     setProductsList: (state, action) => {
@@ -19,10 +20,14 @@ export const productsSlice = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.productsB = action.payload;
     },
+    setCategories: (state, action) => {
+      // eslint-disable-next-line no-param-reassign
+      state.categories = action.payload;
+    },
   },
 });
 
-export const { setProductsList, setProducts } = productsSlice.actions;
+export const { setProductsList, setProducts, setCategories } = productsSlice.actions;
 
 export default productsSlice.reducer;
 
@@ -58,6 +63,22 @@ export const createProduct = (body, token) => async (dispatch) => {
     //   url: 'http://localhost:3000/products',
     //   data: body,
     // });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCategories = () => async (dispatch) => {
+  const catJSON = {};
+  try {
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/categories`);
+    const { data } = res;
+    const name = data.map((item) => item.name);
+    const id = data.map((item) => item.id);
+    id.forEach((item, index) => {
+      catJSON[item] = name[index];
+    });
+    dispatch(setCategories(catJSON));
   } catch (error) {
     console.log(error);
   }

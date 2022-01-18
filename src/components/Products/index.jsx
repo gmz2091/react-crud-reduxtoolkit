@@ -4,11 +4,13 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import Textfield from '../FormsUI/Textfield';
 import Button from '../FormsUI/Button';
 import Checkbox from '../FormsUI/Checkbox';
-import { createProduct } from '../../redux/slices/products';
+import { createProduct, getCategories } from '../../redux/slices/products';
+import Select from '../FormsUI/Select';
 
 const useStyles = makeStyles((theme) => ({
   formWrapper: {
@@ -47,8 +49,13 @@ const validationSchema = () => ({
 const FORM_VALIDATION_SCHEMA = Yup.object(validationSchema());
 
 const Products = () => {
+  const { categories } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
 
   return (
     <Grid container>
@@ -76,14 +83,14 @@ const Products = () => {
                     </Typography>
                   </Grid>
 
-                  <Grid item xs={6}>
+                  <Grid item sm={6} xs={12}>
                     <Textfield
                       name="code"
                       label="Code"
                     />
                   </Grid>
 
-                  <Grid item xs={6}>
+                  <Grid item sm={6} xs={12}>
                     <Textfield
                       name="name"
                       label="Name"
@@ -97,20 +104,21 @@ const Products = () => {
                     />
                   </Grid>
 
-                  <Grid item xs={6}>
+                  <Grid item sm={6} xs={12}>
                     <Textfield
                       name="price"
                       label="Price"
                     />
                   </Grid>
-                  <Grid item xs={6}>
-                    <Textfield
+                  <Grid item sm={6} xs={12}>
+                    <Select
                       name="category_id"
                       label="Category"
+                      options={categories}
                     />
                   </Grid>
 
-                  <Grid item xs={12}>
+                  <Grid item sm={6}>
                     <Checkbox
                       name="status"
                       legend="Status"
@@ -118,7 +126,7 @@ const Products = () => {
                     />
                   </Grid>
 
-                  <Grid item xs={12}>
+                  <Grid item sm={6} xs={12}>
                     <Button>
                       Submit Form
                     </Button>

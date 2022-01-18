@@ -83,12 +83,29 @@ const Navbar = ({ session }) => {
             >
               {session ? (
                 Routes.map((route, index) => (
-                  <MenuItem key={index} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{route.title}</Typography>
+                  <MenuItem style={{ display: 'flex', flexDirection: 'column' }} key={index} onClick={handleCloseNavMenu}>
+                    <NavLink
+                      style={{
+                        textDecoration: 'none', color: '#000', padding: '0 20px',
+                      }}
+                      to={route.path}
+                    >
+                      {route.title}
+                    </NavLink>
                   </MenuItem>
                 ))) : (RoutesSession.map((route, index) => (
-                  <MenuItem key={index} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{route.title}</Typography>
+                  <MenuItem
+                    key={index}
+                    onClick={handleCloseNavMenu}
+                  >
+                    <NavLink
+                      style={{
+                        textDecoration: 'none', color: '#000',
+                      }}
+                      to={route.path}
+                    >
+                      {route.title}
+                    </NavLink>
                   </MenuItem>
               )))}
             </Menu>
